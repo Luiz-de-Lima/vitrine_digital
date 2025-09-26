@@ -8,8 +8,9 @@ export default function Home() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const pruductData = await getProduct(1);
+        const pruductData = await getProduct(10);
         setProduct(pruductData);
+        console.log(product);
       } catch (error) {
       } finally {
         setIsloading(false);
@@ -33,22 +34,23 @@ export default function Home() {
   }
   return (
     <main className="container mx-auto p-8">
-      <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-        <div className="w-1/2 md:w-1/3">
-          <img
-            src={product.image}
-            alt={product.title}
-            className="w-full h-auto object-contain rounded-lg shadow-md"
-          />
-        </div>
-        <div className="w-full md:w-2/3">
-          <h1 className="text-4xl font-bold mb-4">{product.title}</h1>
-          <p className="text-xl text-gray-700 mb-2">${product.price}</p>
-          <p className="text-gray-500 mb-6">{product.description}</p>
-          <div className="mt-8">
-          
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {product.map((product) => (
+          <div
+            key={product.id}
+            className="g-white p-4 rounded-lg shadow-xl flex flex-col items-center text-center hover:shadow-2xl transition"
+          >
+            <img
+              src={product.image}
+              alt={product.title}
+              className="w-full h-48 object-contain mb-4"
+            />
+
+            <h1 className="text-lg font-semibold mb-2">{product.title}</h1>
+            <p className="ext-xl text-green-600 mb-4">${product.price}</p>
+            <p className="text-gray-500 mb-6">{product.description}</p>
           </div>
-        </div>
+        ))}
       </div>
     </main>
   );
