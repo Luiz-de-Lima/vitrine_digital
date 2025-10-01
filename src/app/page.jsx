@@ -1,7 +1,8 @@
 "use client";
-import { useState, useEffect, useMemo } from "react";
-import { getProduct } from "@/services/services";
+import { useState, useEffect } from "react";
 import PurchaseModal from "@/components/PurchaseModal";
+import Header from "@/components/Header";
+import { getProduct } from "@/services/services";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -20,12 +21,7 @@ export default function Home() {
     };
     fetchProduct();
   }, []);
- 
-  const handlePurchase = () => {
-    setTimeout(() => {
-      setPurchaseConfirmed(true);
-    });
-  };
+
   const product = products[0];
 
   if (isLoading) {
@@ -50,6 +46,7 @@ export default function Home() {
           onClose={() => setSelectedProduct(null)}
         />
       )}
+      <Header />
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {products.map((product) => (
@@ -68,8 +65,8 @@ export default function Home() {
             <p className="text-gray-500 mb-6">{product.description}</p>
 
             <button
-              onClick={() => setSelectedProduct(product)} // Este botão abre o modal
-              className="w-full mt-4 px-4 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition"
+              onClick={() => setSelectedProduct(product)} 
+              className="w-full mt-4 px-4 py-2 bg-indigo-600 text-white font-bold rounded-lg hover:bg-green-700 transition"
             >
               Comprar
             </button>

@@ -1,5 +1,6 @@
-import { calculateTotalPrice } from "@/utils/calculations";
 import { useState, useMemo } from "react";
+import PurchaseConfirmationModal from "./PurchaseConfirmationModal";
+import { calculateTotalPrice } from "@/utils/calculations";
 
 export default function PurchaseModal({ product, onClose }) {
   const [quantity, setQuantity] = useState(1);
@@ -20,20 +21,18 @@ export default function PurchaseModal({ product, onClose }) {
   const totalPrice = useMemo(() => {
     return calculateTotalPrice(product.price, quantity);
   }, [product.price, quantity]);
-  if (!product) return null; // Proteção
+  if (!product) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
-      {/* Modal de Confirmação (Interno ao Fluxo) */}
       {purchaseConfirmed && (
-        <purchaseConfirmed
+        <PurchaseConfirmationModal
           quantity={quantity}
           productTitle={product.title}
-          onClose={onClose} // Fecha o modal principal
+          onClose={onClose}
         />
       )}
 
-      {/* Conteúdo Principal do Modal de Compra */}
       <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-lg relative">
         <button
           onClick={onClose}
@@ -47,7 +46,7 @@ export default function PurchaseModal({ product, onClose }) {
         </h2>
 
         <div className="flex flex-col gap-6">
-          {/* Imagem e Preço Base */}
+        
           <div className="flex items-center gap-4">
             <img
               src={product.image}
@@ -62,13 +61,13 @@ export default function PurchaseModal({ product, onClose }) {
             </div>
           </div>
 
-          {/* SELETOR DE QUANTIDADE */}
+      
           <div className="mb-4">
             <h3 className="text-lg font-semibold mb-2">Quantidade</h3>
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => handleQuantity(-1)}
-                disabled={quantity === 1} // Desabilita quando a quantidade é 1
+                disabled={quantity === 1} 
                 className="px-4 py-2 border rounded-md text-xl font-bold bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
               >
                 -
@@ -83,7 +82,7 @@ export default function PurchaseModal({ product, onClose }) {
             </div>
           </div>
 
-          {/* RESUMO E BOTÃO DE COMPRA */}
+          
           <div className="pt-4 border-t">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-bold">Preço Total:</h3>

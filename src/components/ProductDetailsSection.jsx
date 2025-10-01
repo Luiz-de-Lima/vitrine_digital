@@ -8,7 +8,7 @@ export default function ProductDetailsSection({
   onQuantityChange,
   onPurchase,
 }) {
-  // Calculo de preço
+  
   const basePrice = product.price;
   const totalPrice = useMemo(() => {
     return calculateTotalPrice(basePrice, quantity);
@@ -22,7 +22,7 @@ export default function ProductDetailsSection({
         {product.description.substring(0, 250)}...
       </p>
 
-      {/* SELETOR DE QUANTIDADE */}
+      
       <div className="mb-8">
         <h3 className="text-lg font-semibold mb-2">Quantidade</h3>
         <div className="flex items-center space-x-4">
@@ -42,9 +42,9 @@ export default function ProductDetailsSection({
         </div>
       </div>
 
-      {/* PREÇO TOTAL E BOTÃO DE COMPRA */}
+     
       <div className="pt-4 flex flex-col gap-4 border-t">
-        {/* Exibição do Preço Total */}
+       
         <div className="flex justify-between items-center">
           <h3 className="text-lg font-semibold">Preço Total:</h3>
           <p className="text-3xl font-bold text-indigo-600">
@@ -52,7 +52,7 @@ export default function ProductDetailsSection({
           </p>
         </div>
 
-        {/* BOTÃO DE COMPRA */}
+        
         <button
           onClick={onPurchase}
           className={`w-full px-8 py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition shadow-lg

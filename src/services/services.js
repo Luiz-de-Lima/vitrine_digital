@@ -1,7 +1,7 @@
 import axios from "axios";
 const API_URL = "https://fakestoreapi.com";
 
-export const getProduct = async (limit=productID) => {
+export const getProduct = async (limit = productID) => {
     try {
         const response = await axios.get(`${API_URL}/products?limit=${limit}`)
         return response.data
