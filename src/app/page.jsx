@@ -11,11 +11,15 @@ export default function Home() {
 
   useEffect(() => {
     const fetchProduct = async () => {
+      setIsloading(true);
       try {
+        console.log("LOg1: Buscando produto");
         const pruductData = await getProduct(10);
         setProducts(pruductData);
       } catch (error) {
+        console.error("LOG 2: FALHA CRÍTICA NA API:", error);
       } finally {
+    
         setIsloading(false);
       }
     };
@@ -48,7 +52,7 @@ export default function Home() {
       )}
       <Header />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8" data-cy="product-catalog">
         {products.map((product) => (
           <div
             key={product.id}
@@ -61,14 +65,14 @@ export default function Home() {
             />
 
             <h1 className="text-lg font-semibold mb-2">{product.title}</h1>
-            <p className="ext-xl text-green-600 mb-4">${product.price}</p>
+            <p className="text-xl text-green-600 mb-4">${product.price}</p>
             <p className="text-gray-500 mb-6">{product.description}</p>
 
             <button
-              onClick={() => setSelectedProduct(product)} 
+              onClick={() => setSelectedProduct(product)}
               className="w-full mt-4 px-4 py-2 bg-indigo-600 text-white font-bold rounded-lg hover:bg-green-700 transition"
             >
-              Comprar
+              Comprar Agora
             </button>
           </div>
         ))}
