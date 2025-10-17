@@ -19,7 +19,6 @@ export default function Home() {
       } catch (error) {
         console.error("LOG 2: FALHA CRÍTICA NA API:", error);
       } finally {
-    
         setIsloading(false);
       }
     };
@@ -52,22 +51,25 @@ export default function Home() {
       )}
       <Header />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8" data-cy="product-catalog">
+      <div
+        className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8"
+        data-cy="product-catalog"
+      >
         {products.map((product) => (
           <div
             key={product.id}
-            className="g-white p-4 rounded-lg shadow-xl flex flex-col items-center text-center hover:shadow-2xl transition"
+            className="bg-white p-4 rounded-lg shadow-xl flex flex-col items-center h-full text-center hover:shadow-2xl transition"
           >
             <img
               src={product.image}
               alt={product.title}
               className="w-full h-48 object-contain mb-4"
             />
-
-            <h1 className="text-lg font-semibold mb-2">{product.title}</h1>
-            <p className="text-xl text-green-600 mb-4">${product.price}</p>
-            <p className="text-gray-500 mb-6">{product.description}</p>
-
+            <div className="flex-grow">
+              <h1 className="text-lg font-semibold mb-2">{product.title}</h1>
+              <p className="text-xl text-green-600 mb-4">${product.price}</p>
+              <p className="text-gray-500 mb-6">{product.description}</p>
+            </div>
             <button
               onClick={() => setSelectedProduct(product)}
               className="w-full mt-4 px-4 py-2 bg-indigo-600 text-white font-bold rounded-lg hover:bg-green-700 transition"
